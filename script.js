@@ -110,8 +110,50 @@ function validateForm() {
         isValid = false;
     }
 
+    let fatherName = document.forms["onlineForm"]["fatherName"].value;
+    if (fatherName == "") {
+        document.getElementById("fatherNameError").textContent = "Father's name must be filled out";
+        document.getElementById("fatherNameError").style.color = "red";
+        document.getElementById("fatherName").style.borderColor = "red";
+        isValid = false;
+    }
+
+    let motherName = document.forms["onlineForm"]["motherName"].value;
+    if (motherName == "") {
+        document.getElementById("motherNameError").textContent = "Mother's name must be filled out";
+        document.getElementById("motherNameError").style.color = "red";
+        document.getElementById("motherName").style.borderColor = "red";
+        isValid = false;
+    }
+
+    let fdob = document.forms["onlineForm"]["fdob"].value;
+    if (fdob == "") {
+        document.getElementById("fdobError").textContent = "Father's date of birth must be filled out";
+        document.getElementById("fdobError").style.color = "red";
+        document.getElementById("fdob").style.borderColor = "red";
+        isValid = false;
+    } else if(fdob > today.toISOString().split('T')[0]) {
+        document.getElementById("fdobError").textContent = "Father's date of birth cannot be in the future";
+        document.getElementById("fdobError").style.color = "red";
+        document.getElementById("fdob").style.borderColor = "red";
+        isValid = false;
+    }
+
+    let mdob = document.forms["onlineForm"]["mdob"].value;
+    if (mdob == "") {
+        document.getElementById("mdobError").textContent = "Mother's date of birth must be filled out";
+        document.getElementById("mdobError").style.color = "red";
+        document.getElementById("mdob").style.borderColor = "red";
+        isValid = false;
+    } else if(mdob > today.toISOString().split('T')[0]) {
+        document.getElementById("mdobError").textContent = "Mother's date of birth cannot be in the future";
+        document.getElementById("mdobError").style.color = "red";
+        document.getElementById("mdob").style.borderColor = "red";
+        isValid = false;
+    }
+
     return isValid;
-}
+} 
 
 function sameAddress() {
     const homeAddress = document.getElementById("homeAdd");

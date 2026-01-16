@@ -61,7 +61,23 @@ h2 {
     justify-content: space-between;
 }
 
+.contacts-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+
+#pNum, #emailAdd {
+    width: 390px;
+}
+
 #pofbirth, #homeAdd {
+    width: 390px;
+}
+
+#fatherName, #motherName {
     width: 390px;
 }
 

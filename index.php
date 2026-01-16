@@ -91,7 +91,7 @@
                 <input type="checkbox" id="sameAdd" name="sameAdd">Same as Home Address
             </div>
   
-
+    <div class="contacts-row">
         <div class="input-field">
             <label for="pNum">Phone Number</label>
             <input type="pNum" id="pNum" name="pNum"><br>
@@ -102,31 +102,31 @@
             <input type="email" id="emailAdd" name="emailAdd"><br>
             <span id="emailAddError" class="error"></span><br>
         </div>
-
+    </div>
         
         <div class="name-row">
                 <div class="input-field">
-                    <label for="firstName">Father's Name</label>
-                    <input type="text" id="firstName" name="fname">
-                    <span id="fnameError" class="error"></span>
+                    <label for="fatherName">Father's Name</label>
+                    <input type="text" id="fatherName" name="fatherName">
+                    <span id="fatherNameError" class="error"></span>
                 </div>
                 <div class="input-field">
-                    <label for="dob">Date of Birth</label>
-                    <input type="date" id="dob" name="dob"><br>
-                    <span id="dobError" class="error"></span><br>
+                    <label for="fdob">Date of Birth</label>
+                    <input type="date" id="fdob" name="fdob"><br>
+                    <span id="fdobError" class="error"></span><br>
                 </div>
         </div>
                 
             <div class="name-row">
                 <div class="input-field">
-                    <label for="firstName">Mother's Maiden Name</label>
-                    <input type="text" id="firstName" name="fname">
-                    <span id="fnameError" class="error"></span>
+                    <label for="motherName">Mother's Maiden Name</label>
+                    <input type="text" id="motherName" name="motherName">
+                    <span id="motherNameError" class="error"></span>
                 </div>
                 <div class="input-field">
-                    <label for="dob">Date of Birth</label>
-                    <input type="date" id="dob" name="dob"><br>
-                    <span id="dobError" class="error"></span><br>
+                    <label for="mdob">Date of Birth</label>
+                    <input type="date" id="mdob" name="mdob"><br>
+                    <span id="mdobError" class="error"></span><br>
                 </div>
             </div>
             
