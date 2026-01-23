@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2026 at 04:13 AM
+-- Generation Time: Jan 23, 2026 at 04:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,10 +33,17 @@ CREATE TABLE `beneficiary` (
   `bene_fname` varchar(255) NOT NULL,
   `bene_mname` varchar(255) NOT NULL,
   `bene_lname` varchar(255) NOT NULL,
-  `bene_suffix` varchar(255) NOT NULL,
-  `bene_dob` date NOT NULL,
+  `bene_suffix` varchar(255) DEFAULT NULL,
+  `bene_dob` date DEFAULT NULL,
   `bene_relationship` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `beneficiary`
+--
+
+INSERT INTO `beneficiary` (`beneficiary_id`, `user_id`, `bene_fname`, `bene_mname`, `bene_lname`, `bene_suffix`, `bene_dob`, `bene_relationship`) VALUES
+(1, 11, 'Goku', 'krorko', 'Kakarot', '', '2005-01-09', 'Sibling');
 
 -- --------------------------------------------------------
 
@@ -58,6 +65,14 @@ CREATE TABLE `parents` (
   `msuffix` varchar(255) DEFAULT NULL,
   `mdob` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `parents`
+--
+
+INSERT INTO `parents` (`parent_id`, `user_id`, `father_fname`, `father_lname`, `father_mname`, `fsuffix`, `fdob`, `mother_fname`, `mother_lname`, `mother_mname`, `msuffix`, `mdob`) VALUES
+(5, 10, 'Piccolo', 'Season', 'krorkro', '', '2005-01-09', 'Dende', 'Season', 'krorkro', '', '0005-01-09'),
+(6, 11, 'Piccolo', 'Season', 'krorkro', '', '2005-01-09', 'Dende', 'Season', 'krorkro', '', '0005-01-09');
 
 -- --------------------------------------------------------
 
@@ -89,7 +104,9 @@ INSERT INTO `user` (`user_id`, `first_name`, `middle_name`, `last_name`, `suffix
 (1, 'Arl', 'Pedregosa', 'Sison', '', '2005-01-09', 'male', 'single', 'Filipino', 'Cebu City', 'Cebu City', '09912191641', 'arljoshua9@gmail.com'),
 (2, 'James', 'Robert', 'Cabizares', '', '2026-01-29', 'male', 'single', 'Filipino', 'Liking Kawayan', '', '09912191641', 'jamescabz@gmail.com'),
 (3, 'James', 'Robert', 'Cabizares', '', '2026-01-29', 'male', 'single', 'Filipino', 'Liking Kawayan', '', '09912191641', 'jamescabz@gmail.com'),
-(4, 'James', 'Pedregosa', 'Sison', '', '2026-01-31', 'female', 'separated', 'Norwegian', 'Kanal', '', '09912191641', 'jamescabz@gmail.com');
+(4, 'James', 'Pedregosa', 'Sison', '', '2026-01-31', 'female', 'separated', 'Norwegian', 'Kanal', '', '09912191641', 'jamescabz@gmail.com'),
+(10, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com'),
+(11, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -123,19 +140,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `beneficiary`
 --
 ALTER TABLE `beneficiary`
-  MODIFY `beneficiary_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `beneficiary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `parents`
 --
 ALTER TABLE `parents`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
