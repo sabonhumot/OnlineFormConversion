@@ -52,6 +52,7 @@ h2 {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    align-items: center;
 }
 
 .address-info {
@@ -136,6 +137,45 @@ input[type="submit"] {
 input[type="submit"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+#addBeneficiaryButton {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#addBeneficiaryButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+}
+
+.removeBeneficiary {
+    background-color: white;
+    color: #c53030;
+    padding: 8px 16px;
+    border: 2px solid #c53030;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.removeBeneficiary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 62, 62, 0.3);
+    background-color: #c53030;
+    color: white;
 }
 
 .error {

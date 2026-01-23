@@ -17,6 +17,11 @@
         <div class="gen-info">
             <div class="name-row">
                 <div class="input-field">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lname">
+                    <span id="lnameError" class="error"></span>
+                </div>
+                <div class="input-field">
                     <label for="firstName">First Name</label>
                     <input type="text" id="firstName" name="fname">
                     <span id="fnameError" class="error"></span>
@@ -25,11 +30,6 @@
                     <label for="middleName">Middle Name</label>
                     <input type="text" id="middleName" name="mname">
                     <span id="mnameError" class="error"></span>
-                </div>
-                <div class="input-field">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lname">
-                    <span id="lnameError" class="error"></span>
                 </div>
                 <div class="input-field">
                     <label for="suffix">Suffix</label>
@@ -103,12 +103,26 @@
             <span id="emailAddError" class="error"></span><br>
         </div>
     </div>
-        
-        <div class="name-row">
+        <h4>Father's Name</h4>
+        <div class="name-row">               
                 <div class="input-field">
-                    <label for="fatherName">Father's Name</label>
-                    <input type="text" id="fatherName" name="fatherName">
-                    <span id="fatherNameError" class="error"></span>
+                    <label for="fatherLname">Last Name</label>
+                    <input type="text" id="fatherLname" name="fatherLname">
+                    <span id="fatherLnameError" class="error"></span>
+                </div>
+                <div class="input-field">
+                    <label for="fatherFname">First Name</label>
+                    <input type="text" id="fatherFname" name="fatherFname">
+                    <span id="fatherFnameError" class="error"></span>
+                </div>
+                <div class="input-field">
+                    <label for="fatherMname">Middle Name</label>
+                    <input type="text" id="fatherMname" name="fatherMname">
+                    <span id="fatherMnameError" class="error"></span>
+                </div>
+                <div class="input-field">
+                    <label for="suffix">Suffix</label>
+                    <input type="text" id="suffix" name="suffix">
                 </div>
                 <div class="input-field">
                     <label for="fdob">Date of Birth</label>
@@ -116,12 +130,27 @@
                     <span id="fdobError" class="error"></span><br>
                 </div>
         </div>
-                
+            
+            <h4>Mother's Maiden Name</h4>
             <div class="name-row">
                 <div class="input-field">
-                    <label for="motherName">Mother's Maiden Name</label>
-                    <input type="text" id="motherName" name="motherName">
-                    <span id="motherNameError" class="error"></span>
+                    <label for="motherLname">Last Name</label>
+                    <input type="text" id="motherLname" name="motherLname">
+                    <span id="motherLnameError" class="error"></span>
+                </div>
+                <div class="input-field">
+                    <label for="motherFname">First Name</label>
+                    <input type="text" id="motherFname" name="motherFname">
+                    <span id="motherFnameError" class="error"></span>
+                </div>
+                <div class="input-field">
+                    <label for="motherMname">Middle Name</label>
+                    <input type="text" id="motherMname" name="motherMname">
+                    <span id="motherMnameError" class="error"></span>
+                </div>
+                <div class="input-field">
+                    <label for="suffix">Suffix</label>
+                    <input type="text" id="suffix" name="suffix">
                 </div>
                 <div class="input-field">
                     <label for="mdob">Date of Birth</label>
@@ -129,8 +158,13 @@
                     <span id="mdobError" class="error"></span><br>
                 </div>
             </div>
-            
 
+            <h2>Beneficiaries</h2>
+            <div id="beneficiariesContainer">
+                <!-- benefiaries will be added here dynamically -->
+            </div>
+            <button type="button" id="addBeneficiaryButton">Add Beneficiary</button>
+ 
         <input type="submit" id ="submitButton" value="Submit">
 
         

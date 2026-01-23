@@ -110,19 +110,27 @@ function validateForm() {
         isValid = false;
     }
 
-    let fatherName = document.forms["onlineForm"]["fatherName"].value;
-    if (fatherName == "") {
-        document.getElementById("fatherNameError").textContent = "Father's name must be filled out";
-        document.getElementById("fatherNameError").style.color = "red";
-        document.getElementById("fatherName").style.borderColor = "red";
+    let fatherLname = document.forms["onlineForm"]["fatherLname"].value;
+    if (fatherLname == "") {
+        document.getElementById("fatherLnameError").textContent = "Father's name must be filled out";
+        document.getElementById("fatherLnameError").style.color = "red";
+        document.getElementById("fatherLname").style.borderColor = "red";
         isValid = false;
     }
 
-    let motherName = document.forms["onlineForm"]["motherName"].value;
-    if (motherName == "") {
-        document.getElementById("motherNameError").textContent = "Mother's name must be filled out";
-        document.getElementById("motherNameError").style.color = "red";
-        document.getElementById("motherName").style.borderColor = "red";
+    let fatherFname = document.forms["onlineForm"]["fatherFname"].value;
+    if (fatherFname == "") {
+        document.getElementById("fatherFnameError").textContent = "Father's name must be filled out";
+        document.getElementById("fatherFnameError").style.color = "red";
+        document.getElementById("fatherFname").style.borderColor = "red";
+        isValid = false;
+    }
+
+    let fatherMname = document.forms["onlineForm"]["fatherMname"].value;
+    if (fatherMname == "") {
+        document.getElementById("fatherMnameError").textContent = "Father's middle name must be filled out";
+        document.getElementById("fatherMnameError").style.color = "red";
+        document.getElementById("fatherMname").style.borderColor = "red";
         isValid = false;
     }
 
@@ -139,6 +147,30 @@ function validateForm() {
         isValid = false;
     }
 
+    let motherLname = document.forms["onlineForm"]["motherLname"].value;
+    if (motherLname == "") {
+        document.getElementById("motherLnameError").textContent = "Mother's last name must be filled out";
+        document.getElementById("motherLnameError").style.color = "red";
+        document.getElementById("motherLname").style.borderColor = "red";
+        isValid = false;
+    }
+
+    let motherFname = document.forms["onlineForm"]["motherFname"].value;
+    if (motherFname == "") {
+        document.getElementById("motherFnameError").textContent = "Mother's first name must be filled out";
+        document.getElementById("motherFnameError").style.color = "red";
+        document.getElementById("motherFname").style.borderColor = "red";
+        isValid = false;
+    } 
+    
+    let motherMname = document.forms["onlineForm"]["motherMname"].value;
+    if (motherMname == "") {
+        document.getElementById("motherMnameError").textContent = "Mother's middle name must be filled out";
+        document.getElementById("motherMnameError").style.color = "red";
+        document.getElementById("motherMname").style.borderColor = "red";
+        isValid = false;
+    }
+
     let mdob = document.forms["onlineForm"]["mdob"].value;
     if (mdob == "") {
         document.getElementById("mdobError").textContent = "Mother's date of birth must be filled out";
@@ -150,6 +182,52 @@ function validateForm() {
         document.getElementById("mdobError").style.color = "red";
         document.getElementById("mdob").style.borderColor = "red";
         isValid = false;
+    }
+
+    const container = document.getElementById('beneficiariesContainer');
+
+    for (let i = 0;  i < container.children.length; i++) {
+        const beneficiary = container.children[i];
+
+        if (lname == "") {
+            beneficiary.querySelector(`#beneficiaryLnameError${i}`).textContent = "Last name must be filled out";
+            beneficiary.querySelector(`#beneficiaryLnameError${i}`).style.color = "red";
+            beneficiary.querySelector(`[name="beneficiary[${i}][lname]"]`).style.borderColor = "red";
+            isValid = false;
+        }
+
+        if (fname == "") {
+            beneficiary.querySelector(`#beneficiaryFnameError${i}`).textContent = "First name must be filled out";
+            beneficiary.querySelector(`#beneficiaryFnameError${i}`).style.color = "red";
+            beneficiary.querySelector(`[name="beneficiary[${i}][fname]"]`).style.borderColor = "red";
+            isValid = false;
+        }
+
+        if (mname == "") {
+            beneficiary.querySelector(`#beneficiaryMnameError${i}`).textContent = "Middle name must be filled out";
+            beneficiary.querySelector(`#beneficiaryMnameError${i}`).style.color = "red";
+            beneficiary.querySelector(`[name="beneficiary[${i}][mname]"]`).style.borderColor = "red";
+            isValid = false;
+        }
+
+        if (relation == "") {
+            beneficiary.querySelector(`#beneficiaryRelationError${i}`).textContent = "Relationship must be filled out";
+            beneficiary.querySelector(`#beneficiaryRelationError${i}`).style.color = "red";
+            beneficiary.querySelector(`[name="beneficiary[${i}][relation]"]`).style.borderColor = "red";
+            isValid = false;
+        }
+
+        if (dob == "") {
+            beneficiary.querySelector(`#beneficiaryDobError${i}`).textContent = "Date of birth must be filled out";
+            beneficiary.querySelector(`#beneficiaryDobError${i}`).style.color = "red";
+            beneficiary.querySelector(`[name="beneficiary[${i}][dob]"]`).style.borderColor = "red";
+            isValid = false;
+        } else if (dob > today.toISOString().split('T')[0]) {
+            beneficiary.querySelector(`#beneficiaryDobError${i}`).textContent = "Date of birth cannot be in the future";
+            beneficiary.querySelector(`#beneficiaryDobError${i}`).style.color = "red";
+            beneficiary.querySelector(`[name="beneficiary[${i}][dob]"]`).style.borderColor = "red";
+            isValid = false;
+        }
     }
 
     return isValid;
@@ -183,4 +261,68 @@ function sameAddress() {
 
 document.addEventListener('DOMContentLoaded', () => {
     sameAddress();
+
+    const addBeneficiaryButton = document.getElementById('addBeneficiaryButton');
+    if (addBeneficiaryButton) {
+        addBeneficiaryButton.addEventListener('click', addBeneficiary);
+    } else {
+        console.error('Add Beneficiary button not found!');
+    }
 });
+
+let = beneficiaryCount = 0;
+
+function addBeneficiary() {
+    
+    const container = document.getElementById('beneficiariesContainer');
+    const count = beneficiaryCount++;
+
+    const beneficiaryDiv = document.createElement('div');
+    beneficiaryDiv.className = 'beneficiary-row';
+    beneficiaryDiv.innerHTML = `
+    <h5>Beneficiary ${beneficiaryCount}</h5>
+        <div class="name-row">
+            <div class="input-field">
+                <label for="beneficiaryLname${beneficiaryCount}">Last Name</label>
+                <input type="text" id="beneficiaryLname${beneficiaryCount}" name="beneficiary[${beneficiaryCount}][lname]">
+                <span id="beneficiaryLnameError${beneficiaryCount}" class="error"></span>
+            </div>
+            <div class="input-field">
+                <label for="beneficiaryFname${beneficiaryCount}">First Name</label>
+                <input type="text" id="beneficiaryFname${beneficiaryCount}" name="beneficiary[${beneficiaryCount}][fname]">
+                <span id="beneficiaryFnameError${beneficiaryCount}" class="error"></span>
+            </div>
+            <div class="input-field">
+                <label for="beneficiaryMname${beneficiaryCount}">Middle Name</label>
+                <input type="text" id="beneficiaryMname${beneficiaryCount}" name="beneficiary[${beneficiaryCount}][mname]">
+                <span id="beneficiaryMnameError${beneficiaryCount}" class="error"></span>
+            </div>
+            <div class="input-field">
+                <label for="suffix${beneficiaryCount}">Suffix</label>
+                <input type="text" id="suffix${beneficiaryCount}" name="beneficiary[${beneficiaryCount}][suffix]">
+            </div>
+        </div>
+        <div class="other-info">
+            <div class="input-field">
+                <label for="beneficiaryDob${beneficiaryCount}">Date of Birth</label>
+                <input type="date" id="beneficiaryDob${beneficiaryCount}" name="beneficiary[${beneficiaryCount}][dob]">
+                <span id="beneficiaryDobError${beneficiaryCount}" class="error"></span>
+            </div>
+            <div class="input-field">
+                <label for="beneficiaryRelation${beneficiaryCount}">Relationship</label>
+                <input type="text" id="beneficiaryRelation${beneficiaryCount}" name="beneficiary[${beneficiaryCount}][relation]">
+                <span id="beneficiaryRelationError${beneficiaryCount}" class="error"></span>
+            </div>
+            <div class="input-field">
+            <button type="button" class="removeBeneficiary">Remove</button>
+            </div>
+        </div>
+    
+        
+    `;
+    container.appendChild(beneficiaryDiv);
+
+    beneficiaryDiv.querySelector('.removeBeneficiary').addEventListener('click', () => {
+        container.removeChild(beneficiaryDiv);
+    });
+}
