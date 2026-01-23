@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Form Conversion</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+    
 </head>
 <body>
     
@@ -164,6 +164,56 @@
                 <!-- benefiaries will be added here dynamically -->
             </div>
             <button type="button" id="addBeneficiaryButton">Add Beneficiary</button>
+
+            <h2>For Self-Employed/Overseas Filipino Workers/Non-working Spouse</h2>
+            <div class="third-sect">
+                <input type="radio" id="selfEmployed" name="occupationType" value="se">
+                <label for="selfEmployed">Self-Employed</label>
+                <input type="radio" id="ofw" name="occupationType" value="ofw">
+                <label for="ofw">Overseas Filipino Worker (OFW)</label>
+                <input type="radio" id="nonWorkingSpouse" name="occupationType" value="nws">
+                <label for="nonWorkingSpouse">Non-working Spouse</label>
+            </div>
+
+            <h4 id="seTitle" class="hidden">Self-employed (SE)</h4>
+            <section id="seSection" class="hidden">               
+                <div class="input-field">
+                    <label for="profbusi">Profession/Business</label>
+                    <input type="text" id="profbusi" name="profbusi" disabled><br>
+                </div>
+                <div class="input-field">
+                    <label for="yearstarted">Year Profession/Business Started</label>  
+                    <input type="number" id="yearstarted" name="yearstarted" min="1900" max="2099" step="1" disabled>
+                </div>
+                <div class="input-field">
+                    <label for="monthlyearnings">Monthly Earnings (Pesos)</label>
+                    <input type="number" id="monthlyearnings" name="monthlyearnings" step="0.01" disabled><br>
+                </div>
+            </section>
+
+            <h4 id="ofwTitle" class="hidden">Overseas Filipino Worker (OFW)</h4>
+            <section id="ofwSection" class="hidden">               
+                <div class="input-field">
+                    <label for="foreignAdd">Foreign Address</label>
+                    <input type="text" id="foreignAdd" name="foreignAdd" disabled><br>
+                </div>
+                <div class="input-field">
+                    <label for="monthlyearnings">Monthly Earnings (Pesos)</label>
+                    <input type="number" id="monthlyearnings" name="monthlyearnings" step="0.01" disabled><br>
+                </div>
+            </section>
+
+            <h4 id="nwsTitle" class="hidden">Non-working Spouse (NWS)</h4>
+            <section id="nwsSection" class="hidden">               
+                <div class="input-field">
+                    <label for="commonRef">SS No./Common Reference No. of Working Spouse</label>
+                    <input type="text" id="commonRef" name="commonRef" disabled><br>
+                </div>
+                <div class="input-field">
+                    <label for="monthlyearnings">Monthly Earnings (Pesos)</label>
+                    <input type="number" id="monthlyearnings" name="monthlyearnings" step="0.01" disabled><br>
+                </div>
+            </section>
  
         <input type="submit" id ="submitButton" value="Submit">
 
@@ -174,6 +224,6 @@
     
 
 
-
+<script src="script.js"></script>
 </body>
 </html>

@@ -189,6 +189,12 @@ function validateForm() {
     for (let i = 0;  i < container.children.length; i++) {
         const beneficiary = container.children[i];
 
+        const lname = beneficiary.querySelector(`[name="beneficiary[${i}][lname]"]`).value.trim();
+        const fname = beneficiary.querySelector(`[name="beneficiary[${i}][fname]"]`).value.trim();
+        const mname = beneficiary.querySelector(`[name="beneficiary[${i}][mname]"]`).value.trim();
+        const relation = beneficiary.querySelector(`[name="beneficiary[${i}][relation]"]`).value.trim();
+        const dob = beneficiary.querySelector(`[name="beneficiary[${i}][dob]"]`).value;
+
         if (lname == "") {
             beneficiary.querySelector(`#beneficiaryLnameError${i}`).textContent = "Last name must be filled out";
             beneficiary.querySelector(`#beneficiaryLnameError${i}`).style.color = "red";
@@ -268,9 +274,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('Add Beneficiary button not found!');
     }
+
+
 });
 
-let = beneficiaryCount = 0;
+let beneficiaryCount = 0;
 
 function addBeneficiary() {
     
@@ -280,7 +288,7 @@ function addBeneficiary() {
     const beneficiaryDiv = document.createElement('div');
     beneficiaryDiv.className = 'beneficiary-row';
     beneficiaryDiv.innerHTML = `
-    <h5>Beneficiary ${beneficiaryCount}</h5>
+    <h5>Beneficiary ${count + 1}</h5>
         <div class="name-row">
             <div class="input-field">
                 <label for="beneficiaryLname${beneficiaryCount}">Last Name</label>
@@ -326,3 +334,71 @@ function addBeneficiary() {
         container.removeChild(beneficiaryDiv);
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const formSections = {
+    se: {
+      title: document.getElementById('seTitle'),
+      section: document.getElementById('seSection')
+    },
+    ofw: {
+      title: document.getElementById('ofwTitle'),
+      section: document.getElementById('ofwSection')
+    },
+    nws: {
+      title: document.getElementById('nwsTitle'),
+      section: document.getElementById('nwsSection')
+    }
+  };
+
+  const radios = document.querySelectorAll('input[name="occupationType"]');
+
+  function hideAllForms() {
+    Object.values(formSections).forEach(item => {
+      item.title.classList.add('hidden');   // ✅ updated
+      item.section.classList.add('hidden'); // ✅ updated
+
+      item.section.querySelectorAll('input, select, textarea').forEach(el => {
+        el.disabled = true;
+      });
+    });
+  }
+
+  function enableSectionInputs(section) {
+    section.querySelectorAll('input, select, textarea').forEach(el => {
+      el.disabled = false;
+    });
+  }
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      showForm(radio.value);
+    });
+  });
+
+  function showForm(section) {
+    hideAllForms();
+
+    switch(section) {
+      case 'se':
+        formSections.se.title.classList.remove('hidden');
+        formSections.se.section.classList.remove('hidden');
+        enableSectionInputs(formSections.se.section);
+        break;
+
+      case 'ofw':
+        formSections.ofw.title.classList.remove('hidden');
+        formSections.ofw.section.classList.remove('hidden');
+        enableSectionInputs(formSections.ofw.section);
+        break;
+
+      case 'nws':
+        formSections.nws.title.classList.remove('hidden');
+        formSections.nws.section.classList.remove('hidden');
+        enableSectionInputs(formSections.nws.section);
+        break;
+    }
+  }
+
+});
