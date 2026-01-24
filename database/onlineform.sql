@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2026 at 04:18 PM
+-- Generation Time: Jan 24, 2026 at 02:35 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,41 @@ CREATE TABLE `beneficiary` (
 --
 
 INSERT INTO `beneficiary` (`beneficiary_id`, `user_id`, `bene_fname`, `bene_mname`, `bene_lname`, `bene_suffix`, `bene_dob`, `bene_relationship`) VALUES
-(1, 11, 'Goku', 'krorko', 'Kakarot', '', '2005-01-09', 'Sibling');
+(1, 11, 'Goku', 'krorko', 'Kakarot', '', '2005-01-09', 'Sibling'),
+(2, 12, 'qweqwewq', 'eqweqweqw', 'qweqwe', '', '2005-09-01', 'Spouse'),
+(3, 13, 'qweqwewq', 'eqweqweqw', 'qweqwe', '', '2005-09-01', 'Spouse'),
+(4, 14, 'qweqwewq', 'eqweqweqw', 'qweqwe', '', '2005-09-01', 'Spouse');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nws`
+--
+
+CREATE TABLE `nws` (
+  `user_id` int(11) NOT NULL,
+  `common_ref` varchar(255) NOT NULL,
+  `monthly_earnings` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ofw`
+--
+
+CREATE TABLE `ofw` (
+  `user_id` int(11) NOT NULL,
+  `foreign_address` varchar(255) NOT NULL,
+  `monthly_earnings` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ofw`
+--
+
+INSERT INTO `ofw` (`user_id`, `foreign_address`, `monthly_earnings`) VALUES
+(14, 'Japan', '50000');
 
 -- --------------------------------------------------------
 
@@ -72,7 +106,32 @@ CREATE TABLE `parents` (
 
 INSERT INTO `parents` (`parent_id`, `user_id`, `father_fname`, `father_lname`, `father_mname`, `fsuffix`, `fdob`, `mother_fname`, `mother_lname`, `mother_mname`, `msuffix`, `mdob`) VALUES
 (5, 10, 'Piccolo', 'Season', 'krorkro', '', '2005-01-09', 'Dende', 'Season', 'krorkro', '', '0005-01-09'),
-(6, 11, 'Piccolo', 'Season', 'krorkro', '', '2005-01-09', 'Dende', 'Season', 'krorkro', '', '0005-01-09');
+(6, 11, 'Piccolo', 'Season', 'krorkro', '', '2005-01-09', 'Dende', 'Season', 'krorkro', '', '0005-01-09'),
+(7, 12, 'asdasdas', 'asdasdas', 'asdasdsad', '', '2005-09-01', 'asdasdas', 'asdasdas', 'asdasdas', '', '2005-09-01'),
+(8, 13, 'asdasdas', 'asdasdas', 'asdasdsad', '', '2005-09-01', 'asdasdas', 'asdasdas', 'asdasdas', '', '2005-09-01'),
+(9, 14, 'asdasdas', 'asdasdas', 'asdasdsad', '', '2005-09-01', 'asdasdas', 'asdasdas', 'asdasdas', '', '2005-09-01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `self_employed`
+--
+
+CREATE TABLE `self_employed` (
+  `se_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `prof_business` varchar(255) NOT NULL,
+  `year_started` varchar(255) NOT NULL,
+  `monthly_earnings` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `self_employed`
+--
+
+INSERT INTO `self_employed` (`se_id`, `user_id`, `prof_business`, `year_started`, `monthly_earnings`) VALUES
+(1, 12, '', '', ''),
+(2, 13, 'Super Saiyan', '2005', '35000');
 
 -- --------------------------------------------------------
 
@@ -106,7 +165,10 @@ INSERT INTO `user` (`user_id`, `first_name`, `middle_name`, `last_name`, `suffix
 (3, 'James', 'Robert', 'Cabizares', '', '2026-01-29', 'male', 'single', 'Filipino', 'Liking Kawayan', '', '09912191641', 'jamescabz@gmail.com'),
 (4, 'James', 'Pedregosa', 'Sison', '', '2026-01-31', 'female', 'separated', 'Norwegian', 'Kanal', '', '09912191641', 'jamescabz@gmail.com'),
 (10, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com'),
-(11, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com');
+(11, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com'),
+(12, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com'),
+(13, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com'),
+(14, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -120,10 +182,29 @@ ALTER TABLE `beneficiary`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `nws`
+--
+ALTER TABLE `nws`
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `ofw`
+--
+ALTER TABLE `ofw`
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `parents`
 --
 ALTER TABLE `parents`
   ADD PRIMARY KEY (`parent_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `self_employed`
+--
+ALTER TABLE `self_employed`
+  ADD PRIMARY KEY (`se_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -140,19 +221,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `beneficiary`
 --
 ALTER TABLE `beneficiary`
-  MODIFY `beneficiary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `beneficiary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `parents`
 --
 ALTER TABLE `parents`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `self_employed`
+--
+ALTER TABLE `self_employed`
+  MODIFY `se_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -165,10 +252,28 @@ ALTER TABLE `beneficiary`
   ADD CONSTRAINT `beneficiary_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
+-- Constraints for table `nws`
+--
+ALTER TABLE `nws`
+  ADD CONSTRAINT `nws_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `ofw`
+--
+ALTER TABLE `ofw`
+  ADD CONSTRAINT `ofw_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
 -- Constraints for table `parents`
 --
 ALTER TABLE `parents`
   ADD CONSTRAINT `parents_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `self_employed`
+--
+ALTER TABLE `self_employed`
+  ADD CONSTRAINT `self_employed_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

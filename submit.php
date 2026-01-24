@@ -92,6 +92,40 @@
             }
         }
 
+        $occupationType = trim($_POST['occupationType'] ?? '');
+        
+        if ($occupationType === 'se') {
+            $sql_se = "INSERT INTO self_employed(user_id, prof_business, year_started, monthly_earnings) 
+                       VALUES(:user_id, :prof_business, :year_started, :monthly_earnings)"; 
+                       
+            $stmt_se = $db->prepare($sql_se);
+            $stmt_se->execute([
+                ':user_id' => $user_id,
+                ':prof_business' => trim($_POST['profbusi'] ?? ''),
+                ':year_started' => trim($_POST['yearstarted'] ?? null),
+                ':monthly_earnings' => trim($_POST['monthlyearnings'] ?? null)
+            ]);
+        } else if ($occupationType === 'ofw') {
+            $sql_ofw = "INSERT INTO ofw(user_id, foreign_address, monthly_earnings) 
+                        VALUES(:user_id, :foreign_address, :monthly_earnings)"; 
+                        
+            $stmt_ofw = $db->prepare($sql_ofw);
+            $stmt_ofw->execute([
+                ':user_id' => $user_id,
+                ':foreign_address' => trim($_POST['foreignAdd'] ?? ''),
+                ':monthly_earnings' => trim($_POST['monthlyearnings'] ?? null),
+            ]); 
+        } else if ($occupationType === 'nws') {
+            $sql_nws = "INSERT INTO non_working_spouse(user_id, common_ref, monthly_earnings) 
+                        VALUES(:user_id, :common_ref, :monthly_earnings)";
+            $stmt_nws = $db->prepare($sql_nws);
+            $stmt_nws->execute([
+                ':user_id' => $user_id,
+                ':common_ref' => trim($_POST['commonRef'] ?? ''),
+                ':monthly_earnings' => trim($_POST['monthlyearnings'] ?? null),
+            ]);
+        }
+
         $db->commit();
         echo "Data submitted successfully.";
         } catch (Exception $e) {

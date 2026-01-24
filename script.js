@@ -356,8 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function hideAllForms() {
     Object.values(formSections).forEach(item => {
-      item.title.classList.add('hidden');   // ✅ updated
-      item.section.classList.add('hidden'); // ✅ updated
+      item.title.classList.add('hidden');   
+      item.section.classList.add('hidden'); 
 
       item.section.querySelectorAll('input, select, textarea').forEach(el => {
         el.disabled = true;
