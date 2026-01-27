@@ -30,11 +30,12 @@
 
         try {
             $db->beginTransaction();
-        
 
+            $occupationType = trim($_POST['occupationType'] ?? '');
+               
         // Insert into users table
-        $sql_user = "INSERT INTO user(first_name, middle_name, last_name, suffix, date_of_birth, sex, civil_status, nationality, place_of_birth, home_address, phone_number, email_address) 
-                     VALUES(:first_name, :middle_name, :last_name, :suffix, :date_of_birth, :sex, :civil_status, :nationality, :place_of_birth, :home_address, :phone_number, :email_address)";
+        $sql_user = "INSERT INTO user(first_name, middle_name, last_name, suffix, date_of_birth, sex, civil_status, nationality, place_of_birth, home_address, phone_number, email_address, occupation) 
+                     VALUES(:first_name, :middle_name, :last_name, :suffix, :date_of_birth, :sex, :civil_status, :nationality, :place_of_birth, :home_address, :phone_number, :email_address, :occupation)";
 
         $stmt_user = $db->prepare($sql_user);
         $stmt_user->execute([
@@ -47,9 +48,10 @@
             ':civil_status' => trim($_POST['civilStatus'] ?? ''),
             ':nationality' => trim($_POST['nationality'] ?? ''),
             ':place_of_birth' => trim($_POST['pofbirth'] ?? ''),
-            ':home_address' => trim($_POST['homeAdd'] ?? ''),
+            ':home_address' => trim($_POST['homeAddressHidden'] ?? ''),
             ':phone_number' => trim($_POST['pNum'] ?? ''),
-            ':email_address' => trim($_POST['emailAdd'] ?? '')
+            ':email_address' => trim($_POST['emailAdd'] ?? ''),
+            ':occupation' => $occupationType
         ]);
 
         $user_id = $db->lastInsertId();
@@ -92,11 +94,12 @@
             }
         }
 
-        $occupationType = trim($_POST['occupationType'] ?? '');
+        
         
         if ($occupationType === 'se') {
             $sql_se = "INSERT INTO self_employed(user_id, prof_business, year_started, monthly_earnings) 
                        VALUES(:user_id, :prof_business, :year_started, :monthly_earnings)"; 
+            
                        
             $stmt_se = $db->prepare($sql_se);
             $stmt_se->execute([

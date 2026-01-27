@@ -243,25 +243,32 @@ function sameAddress() {
     const homeAddress = document.getElementById("homeAdd");
     const pofbirth = document.getElementById("pofbirth");
     const sameAdd = document.getElementById("sameAdd");
+    const homeAddressHidden = document.getElementById("homeAddressHidden");
 
     sameAdd.addEventListener('change', function() {
-    
+
     if (sameAdd.checked) {
         homeAddress.value = pofbirth.value;
         homeAddress.disabled = true;
+        homeAddressHidden.value = pofbirth.value;
     } else {
         homeAddress.disabled = false;
         homeAddress.value = '';
+        homeAddressHidden.value = '';
     }
     });
 
     pofbirth.addEventListener('input', () => {
-        if (sameAdd.checked) homeAddress.value = pofbirth.value;
+        if (sameAdd.checked) {
+            homeAddress.value = pofbirth.value;
+            homeAddressHidden.value = pofbirth.value;
+        }
     });
 
     if (sameAdd.checked) {
-    homeAdd.value = pofbirth.value;
-    homeAdd.disabled = true;
+    homeAddress.value = pofbirth.value;
+    homeAddress.disabled = true;
+    homeAddressHidden.value = pofbirth.value;
   }
 }
 

@@ -1,0 +1,4 @@
+- [x] Add hidden input field in index.php for home_address
+- [x] Update script.js to set hidden input value when checkbox is checked
+- [x] Update submit.php to use hidden input for home_address
+- [ ] Test the form submission with checkbox checked

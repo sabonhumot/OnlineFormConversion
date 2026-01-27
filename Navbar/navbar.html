@@ -1,13 +1,23 @@
 <html>
 <head>
-    <link rel="stylesheet" href="Navbar/navbar.module.css">
+    <link rel="stylesheet" href="/OnlineFormConversion/Navbar/navbar.module.css">
 </head>
 <body>
 
 
     <div class="topnav">
-        <a href="index.php">Add Responses</a>
-        <a href="view.php">View Responses</a>
+        <a href="/OnlineFormConversion/index.php">Add Responses</a>
+        <a href="/OnlineFormConversion/View/view.php">View Responses</a>
     </div>
+
+<script>
+    document.querySelectorAll('.topnav a').forEach(link => {
+        if (link.href === window.location.href) {
+            link.classList.add('active');
+        }
+    }); 
+</script>
+
+
 </body>
 </html>

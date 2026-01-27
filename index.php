@@ -88,6 +88,7 @@
                 <input type="text" id="homeAdd" name="homeAdd"><br>
                 <span id="homeAddError" class="error"></span><br>
             </div>
+            <input type="hidden" id="homeAddressHidden" name="homeAddressHidden">
         </div>
 
         <div class="checkbox-container">
