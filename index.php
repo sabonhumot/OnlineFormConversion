@@ -8,7 +8,10 @@
     
 </head>
 <body>
-    
+
+    <?php
+    require_once 'Navbar/navbar.html';
+    ?>
 
     <div class="container">
     <h1>Online Form</h1>
@@ -224,6 +227,8 @@
     
 
 
+
 <script src="script.js"></script>
+<div id="toast" class="toast hidden">Saved Successfully</div>
 </body>
 </html>

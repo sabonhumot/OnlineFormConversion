@@ -116,7 +116,7 @@
                 ':monthly_earnings' => trim($_POST['monthlyearnings'] ?? null),
             ]); 
         } else if ($occupationType === 'nws') {
-            $sql_nws = "INSERT INTO non_working_spouse(user_id, common_ref, monthly_earnings) 
+            $sql_nws = "INSERT INTO nws(user_id, common_ref, monthly_earnings) 
                         VALUES(:user_id, :common_ref, :monthly_earnings)";
             $stmt_nws = $db->prepare($sql_nws);
             $stmt_nws->execute([
@@ -127,7 +127,8 @@
         }
 
         $db->commit();
-        echo "Data submitted successfully.";
+        header("Location: index.php?success=1");
+        exit();
         } catch (Exception $e) {
             $db->rollBack();
             echo "Failed to submit data: " . $e->getMessage();

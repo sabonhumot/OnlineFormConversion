@@ -276,6 +276,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    if (new URLSearchParams(window.location.search).get('success') === '1') {   
+        showSuccess('Data submitted successfully!');
+    }
+
 });
 
 let beneficiaryCount = 0;
@@ -402,3 +406,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+function showSuccess(message) {
+  const toast = document.getElementById('toast');
+
+  toast.textContent = message;
+  toast.classList.remove('hidden');
+
+  toast.offsetHeight;
+
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 400);
+  }, 3000);
+}
