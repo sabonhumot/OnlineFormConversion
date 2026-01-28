@@ -282,11 +282,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Add Beneficiary button not found!');
     }
 
+    // Initialize modal functionality
+    initializeModal();
 
     if (new URLSearchParams(window.location.search).get('success') === '1') {   
         showSuccess('Data submitted successfully!');
     }
-
 });
 
 let beneficiaryCount = 0;
@@ -431,4 +432,140 @@ function showSuccess(message) {
       toast.classList.add('hidden');
     }, 400);
   }, 3000);
+}
+
+function initializeModal() {
+    // Check if modal elements exist before initializing
+    const modal = document.getElementById('userModal');
+    const modalBody = document.getElementById('modalBody');
+    const closeBtn = document.querySelector('.close-btn');
+
+    if (!modal || !modalBody || !closeBtn) {
+        console.log('Modal elements not found on this page');
+        return;
+    }
+
+    document.querySelectorAll('.view-details').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const userId = btn.dataset.id;
+
+            fetch(`viewModal.php?user_id=${userId}`)
+                .then(res => res.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    modal.classList.remove('hidden');
+                    initializeModalButtons();
+                })
+                .catch(error => {
+                    console.error('Error fetching modal content:', error);
+                });
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', e => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+}
+
+function initializeModalButtons() {
+    const editBtn = document.getElementById('editBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const deleteBtn = document.getElementById('deleteBtn');
+    const form = document.getElementById('editForm');
+
+    if (editBtn) {
+        editBtn.addEventListener('click', () => {
+            // Enable all form fields
+            form.querySelectorAll('input, select').forEach(el => {
+                el.disabled = false;
+            });
+            editBtn.style.display = 'none';
+            saveBtn.style.display = 'inline-block';
+        });
+    }
+
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Handle beneficiaries array
+            const beneficiaries = [];
+            const beneLnames = formData.getAll('bene_lname[]');
+            const beneFnames = formData.getAll('bene_fname[]');
+            const beneMnames = formData.getAll('bene_mname[]');
+            const beneSuffixes = formData.getAll('bene_suffix[]');
+            const beneDobs = formData.getAll('bene_dob[]');
+            const beneRelationships = formData.getAll('bene_relationship[]');
+
+            for (let i = 0; i < beneLnames.length; i++) {
+                beneficiaries.push({
+                    bene_lname: beneLnames[i],
+                    bene_fname: beneFnames[i],
+                    bene_mname: beneMnames[i],
+                    bene_suffix: beneSuffixes[i],
+                    bene_dob: beneDobs[i],
+                    bene_relationship: beneRelationships[i]
+                });
+            }
+            data.beneficiaries = beneficiaries;
+
+            fetch('updateUser.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    showSuccess('User updated successfully!');
+                    // Reload the page or refresh the user list
+                    location.reload();
+                } else {
+                    alert('Error updating user: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating user');
+            });
+        });
+    }
+
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to delete this user?')) {
+                const userId = form.querySelector('input[name="user_id"]').value;
+
+                fetch('deleteUser.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user_id: userId })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        showSuccess('User deleted successfully!');
+                        location.reload();
+                    } else {
+                        alert('Error deleting user: ' + result.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting user');
+                });
+            }
+        });
+    }
 }
