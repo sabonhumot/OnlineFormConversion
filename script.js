@@ -245,6 +245,12 @@ function sameAddress() {
     const sameAdd = document.getElementById("sameAdd");
     const homeAddressHidden = document.getElementById("homeAddressHidden");
 
+    // Check if all elements exist before adding event listeners
+    if (!sameAdd || !homeAddress || !pofbirth || !homeAddressHidden) {
+        console.log('sameAddress elements not found, skipping initialization');
+        return;
+    }
+
     sameAdd.addEventListener('change', function() {
 
     if (sameAdd.checked) {
@@ -273,6 +279,7 @@ function sameAddress() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM Content Loaded - script.js running');
     sameAddress();
 
     const addBeneficiaryButton = document.getElementById('addBeneficiaryButton');
@@ -282,18 +289,83 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Add Beneficiary button not found!');
     }
 
-    // Initialize modal functionality
-    initializeModal();
+    // Initialize button functionality
+    initializeButtons();
 
-    if (new URLSearchParams(window.location.search).get('success') === '1') {   
+    if (new URLSearchParams(window.location.search).get('success') === '1') {
         showSuccess('Data submitted successfully!');
+    }
+
+    // Form sections logic
+    const formSections = {
+        se: {
+            title: document.getElementById('seTitle'),
+            section: document.getElementById('seSection')
+        },
+        ofw: {
+            title: document.getElementById('ofwTitle'),
+            section: document.getElementById('ofwSection')
+        },
+        nws: {
+            title: document.getElementById('nwsTitle'),
+            section: document.getElementById('nwsSection')
+        }
+    };
+
+    const radios = document.querySelectorAll('input[name="occupationType"]');
+
+    function hideAllForms() {
+        Object.values(formSections).forEach(item => {
+            item.title.classList.add('hidden');
+            item.section.classList.add('hidden');
+
+            item.section.querySelectorAll('input, select, textarea').forEach(el => {
+                el.disabled = true;
+            });
+        });
+    }
+
+    function enableSectionInputs(section) {
+        section.querySelectorAll('input, select, textarea').forEach(el => {
+            el.disabled = false;
+        });
+    }
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            showForm(radio.value);
+        });
+    });
+
+    function showForm(section) {
+        hideAllForms();
+
+        switch(section) {
+            case 'se':
+                formSections.se.title.classList.remove('hidden');
+                formSections.se.section.classList.remove('hidden');
+                enableSectionInputs(formSections.se.section);
+                break;
+
+            case 'ofw':
+                formSections.ofw.title.classList.remove('hidden');
+                formSections.ofw.section.classList.remove('hidden');
+                enableSectionInputs(formSections.ofw.section);
+                break;
+
+            case 'nws':
+                formSections.nws.title.classList.remove('hidden');
+                formSections.nws.section.classList.remove('hidden');
+                enableSectionInputs(formSections.nws.section);
+                break;
+        }
     }
 });
 
 let beneficiaryCount = 0;
 
 function addBeneficiary() {
-    
+
     const container = document.getElementById('beneficiariesContainer');
     const count = beneficiaryCount++;
 
@@ -337,8 +409,8 @@ function addBeneficiary() {
             <button type="button" class="removeBeneficiary">Remove</button>
             </div>
         </div>
-    
-        
+
+
     `;
     container.appendChild(beneficiaryDiv);
 
@@ -347,76 +419,15 @@ function addBeneficiary() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-
-  const formSections = {
-    se: {
-      title: document.getElementById('seTitle'),
-      section: document.getElementById('seSection')
-    },
-    ofw: {
-      title: document.getElementById('ofwTitle'),
-      section: document.getElementById('ofwSection')
-    },
-    nws: {
-      title: document.getElementById('nwsTitle'),
-      section: document.getElementById('nwsSection')
-    }
-  };
-
-  const radios = document.querySelectorAll('input[name="occupationType"]');
-
-  function hideAllForms() {
-    Object.values(formSections).forEach(item => {
-      item.title.classList.add('hidden');   
-      item.section.classList.add('hidden'); 
-
-      item.section.querySelectorAll('input, select, textarea').forEach(el => {
-        el.disabled = true;
-      });
-    });
-  }
-
-  function enableSectionInputs(section) {
-    section.querySelectorAll('input, select, textarea').forEach(el => {
-      el.disabled = false;
-    });
-  }
-
-  radios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      showForm(radio.value);
-    });
-  });
-
-  function showForm(section) {
-    hideAllForms();
-
-    switch(section) {
-      case 'se':
-        formSections.se.title.classList.remove('hidden');
-        formSections.se.section.classList.remove('hidden');
-        enableSectionInputs(formSections.se.section);
-        break;
-
-      case 'ofw':
-        formSections.ofw.title.classList.remove('hidden');
-        formSections.ofw.section.classList.remove('hidden');
-        enableSectionInputs(formSections.ofw.section);
-        break;
-
-      case 'nws':
-        formSections.nws.title.classList.remove('hidden');
-        formSections.nws.section.classList.remove('hidden');
-        enableSectionInputs(formSections.nws.section);
-        break;
-    }
-  }
-
-});
-
 function showSuccess(message) {
   const toast = document.getElementById('toast');
+
+  // Check if toast element exists before trying to use it
+  if (!toast) {
+    console.log('Toast element not found, using alert instead');
+    alert(message);
+    return;
+  }
 
   toast.textContent = message;
   toast.classList.remove('hidden');
@@ -434,42 +445,54 @@ function showSuccess(message) {
   }, 3000);
 }
 
-function initializeModal() {
-    // Check if modal elements exist before initializing
-    const modal = document.getElementById('userModal');
-    const modalBody = document.getElementById('modalBody');
-    const closeBtn = document.querySelector('.close-btn');
-
-    if (!modal || !modalBody || !closeBtn) {
-        console.log('Modal elements not found on this page');
-        return;
-    }
-
-    document.querySelectorAll('.view-details').forEach(btn => {
+function initializeButtons() {
+    console.log('initializeButtons called');
+    
+    // Handle edit buttons
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+        console.log('Edit button found:', btn);
         btn.addEventListener('click', () => {
             const userId = btn.dataset.id;
-
-            fetch(`viewModal.php?user_id=${userId}`)
-                .then(res => res.text())
-                .then(html => {
-                    modalBody.innerHTML = html;
-                    modal.classList.remove('hidden');
-                    initializeModalButtons();
-                })
-                .catch(error => {
-                    console.error('Error fetching modal content:', error);
-                });
+            console.log('Edit button clicked, user ID:', userId);
+            // Redirect to updateUserForm.php with edit parameter (go up one level from View folder)
+            window.location.href = `../updateUserForm.php?edit=${userId}`;
         });
     });
 
-    closeBtn.addEventListener('click', () => {
-        modal.classList.add('hidden');
-    });
-
-    window.addEventListener('click', e => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-        }
+    // Handle delete buttons
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        console.log('Delete button found:', btn);
+        btn.addEventListener('click', () => {
+            const userId = btn.dataset.id;
+            console.log('Delete button clicked, user ID:', userId);
+            if (confirm('Are you sure you want to delete this user?')) {
+                console.log('Sending delete request for user:', userId);
+                fetch('../deleteUser.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user_id: userId })
+                })
+                .then(res => {
+                    console.log('Delete response status:', res.status);
+                    return res.json();
+                })
+                .then(result => {
+                    console.log('Delete response:', result);
+                    if (result.success) {
+                        showSuccess('User deleted successfully!');
+                        location.reload();
+                    } else {
+                        alert('Error deleting user: ' + result.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting user');
+                });
+            }
+        });
     });
 }
 

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2026 at 02:35 AM
+-- Generation Time: Jan 30, 2026 at 12:38 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -60,6 +60,15 @@ CREATE TABLE `nws` (
   `monthly_earnings` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `nws`
+--
+
+INSERT INTO `nws` (`user_id`, `common_ref`, `monthly_earnings`) VALUES
+(15, 'Animi quisquam dolo', '8'),
+(16, 'Animi quisquam dolo', '8'),
+(17, 'Animi quisquam dolo', '8');
+
 -- --------------------------------------------------------
 
 --
@@ -77,7 +86,9 @@ CREATE TABLE `ofw` (
 --
 
 INSERT INTO `ofw` (`user_id`, `foreign_address`, `monthly_earnings`) VALUES
-(14, 'Japan', '50000');
+(14, 'Japan', '50000'),
+(18, 'Japan', '1000'),
+(19, 'Japan', '1000');
 
 -- --------------------------------------------------------
 
@@ -109,7 +120,13 @@ INSERT INTO `parents` (`parent_id`, `user_id`, `father_fname`, `father_lname`, `
 (6, 11, 'Piccolo', 'Season', 'krorkro', '', '2005-01-09', 'Dende', 'Season', 'krorkro', '', '0005-01-09'),
 (7, 12, 'asdasdas', 'asdasdas', 'asdasdsad', '', '2005-09-01', 'asdasdas', 'asdasdas', 'asdasdas', '', '2005-09-01'),
 (8, 13, 'asdasdas', 'asdasdas', 'asdasdsad', '', '2005-09-01', 'asdasdas', 'asdasdas', 'asdasdas', '', '2005-09-01'),
-(9, 14, 'asdasdas', 'asdasdas', 'asdasdsad', '', '2005-09-01', 'asdasdas', 'asdasdas', 'asdasdas', '', '2005-09-01');
+(9, 14, 'asdasdas', 'asdasdas', 'asdasdsad', '', '2005-09-01', 'asdasdas', 'asdasdas', 'asdasdas', '', '2005-09-01'),
+(10, 15, 'Cruz', 'Cain', 'Norman Caldwell', '', '2004-12-03', 'Gwendolyn', 'Robinson', 'Sean Brewer', '', '1990-03-04'),
+(11, 16, 'Cruz', 'Cain', 'Norman Caldwell', '', '2004-12-03', 'Gwendolyn', 'Robinson', 'Sean Brewer', '', '1990-03-04'),
+(12, 17, 'Cruz', 'Cain', 'Norman Caldwell', '', '2004-12-03', 'Gwendolyn', 'Robinson', 'Sean Brewer', '', '1990-03-04'),
+(13, 18, 'Courtney', 'Mccarty', 'Damon Aguilar', '', '1971-11-19', 'Raja', 'Mccray', 'Darius Hicks', '', '2015-07-10'),
+(14, 19, 'Courtney', 'Mccarty', 'Damon Aguilar', '', '1971-11-19', 'Raja', 'Mccray', 'Darius Hicks', '', '2015-07-10'),
+(15, 20, 'Quinn', 'Cabrera', 'Bianca Odonnell', '', '1976-12-28', 'Madeson', 'Wall', 'Mia Hopper', '', '1981-04-13');
 
 -- --------------------------------------------------------
 
@@ -131,7 +148,8 @@ CREATE TABLE `self_employed` (
 
 INSERT INTO `self_employed` (`se_id`, `user_id`, `prof_business`, `year_started`, `monthly_earnings`) VALUES
 (1, 12, '', '', ''),
-(2, 13, 'Super Saiyan', '2005', '35000');
+(2, 13, 'Super Saiyan', '2005', '35000'),
+(3, 20, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -152,23 +170,30 @@ CREATE TABLE `user` (
   `place_of_birth` varchar(255) NOT NULL,
   `home_address` varchar(255) NOT NULL,
   `phone_number` varchar(255) NOT NULL,
-  `email_address` varchar(255) NOT NULL
+  `email_address` varchar(255) NOT NULL,
+  `occupation` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `date_of_birth`, `sex`, `civil_status`, `nationality`, `place_of_birth`, `home_address`, `phone_number`, `email_address`) VALUES
-(1, 'Arl', 'Pedregosa', 'Sison', '', '2005-01-09', 'male', 'single', 'Filipino', 'Cebu City', 'Cebu City', '09912191641', 'arljoshua9@gmail.com'),
-(2, 'James', 'Robert', 'Cabizares', '', '2026-01-29', 'male', 'single', 'Filipino', 'Liking Kawayan', '', '09912191641', 'jamescabz@gmail.com'),
-(3, 'James', 'Robert', 'Cabizares', '', '2026-01-29', 'male', 'single', 'Filipino', 'Liking Kawayan', '', '09912191641', 'jamescabz@gmail.com'),
-(4, 'James', 'Pedregosa', 'Sison', '', '2026-01-31', 'female', 'separated', 'Norwegian', 'Kanal', '', '09912191641', 'jamescabz@gmail.com'),
-(10, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com'),
-(11, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com'),
-(12, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com'),
-(13, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com'),
-(14, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com');
+INSERT INTO `user` (`user_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `date_of_birth`, `sex`, `civil_status`, `nationality`, `place_of_birth`, `home_address`, `phone_number`, `email_address`, `occupation`) VALUES
+(1, 'Arl', 'Pedregosa', 'Sison', '', '2005-01-09', 'male', 'single', 'Filipino', 'Cebu City', 'Cebu City', '09912191641', 'arljoshua9@gmail.com', NULL),
+(2, 'James', 'Robert', 'Cabizares', '', '2026-01-29', 'male', 'single', 'Filipino', 'Liking Kawayan', '', '09912191641', 'jamescabz@gmail.com', NULL),
+(3, 'James', 'Robert', 'Cabizares', '', '2026-01-29', 'male', 'single', 'Filipino', 'Liking Kawayan', '', '09912191641', 'jamescabz@gmail.com', NULL),
+(4, 'James', 'Pedregosa', 'Sison', '', '2026-01-31', 'female', 'separated', 'Norwegian', 'Kanal', '', '09912191641', 'jamescabz@gmail.com', NULL),
+(10, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com', NULL),
+(11, 'Joswa', 'krorkro', 'Season', 'Jr', '2005-01-09', 'male', 'single', 'Namekian', 'Planet Namek', 'Planet Namek', '09912191641', 'arljoshua9@gmail.com', NULL),
+(12, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com', NULL),
+(13, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com', NULL),
+(14, 'asdasdasd', 'asdasdasdas', 'asdasdas', '', '2005-09-01', 'male', 'separated', 'qeqweqwe', 'qweqweqweqw', '', '09912191641', 'arljoshua9@gmail.com', NULL),
+(15, 'Maile', 'Hedda Donaldson', 'Solis', 'Non voluptas corpori', '1972-11-05', 'male', 'divorced', 'Occaecat aspernatur', 'Enim vel ipsum est m', '', '09912191641', 'mosici@mailinator.com', NULL),
+(16, 'Maile', 'Hedda Donaldson', 'Solis', 'Non voluptas corpori', '1972-11-05', 'male', 'divorced', 'Occaecat aspernatur', 'Enim vel ipsum est m', '', '09912191641', 'mosici@mailinator.com', NULL),
+(17, 'Maile', 'Hedda Donaldson', 'Solis', 'Non voluptas corpori', '1972-11-05', 'male', 'divorced', 'Occaecat aspernatur', 'Enim vel ipsum est m', '', '09912191641', 'mosici@mailinator.com', NULL),
+(18, 'Robert', 'Brady Weeks', 'Albert', 'Consequatur quis de', '1974-06-18', 'male', 'single', 'Pariatur Commodo no', 'Qui aliquid et maior', '', '09912191641', 'pukesuxaf@mailinator.com', NULL),
+(19, 'Robert', 'Brady Weeks', 'Albert', 'Consequatur quis de', '1974-06-18', 'male', 'single', 'Pariatur Commodo no', 'Qui aliquid et maior', '', '09912191641', 'pukesuxaf@mailinator.com', NULL),
+(20, 'Karina', 'Shelley Joseph', 'Walsh', 'Veniam repudiandae', '1985-06-23', 'male', 'divorced', 'Dolores aut ipsum i', 'Iste qui eiusmod pla', '', '09912191641', 'cubesequti@mailinator.com', NULL);
 
 --
 -- Indexes for dumped tables
@@ -221,25 +246,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `beneficiary`
 --
 ALTER TABLE `beneficiary`
-  MODIFY `beneficiary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `beneficiary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `parents`
 --
 ALTER TABLE `parents`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `self_employed`
 --
 ALTER TABLE `self_employed`
-  MODIFY `se_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `se_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
@@ -249,31 +274,31 @@ ALTER TABLE `user`
 -- Constraints for table `beneficiary`
 --
 ALTER TABLE `beneficiary`
-  ADD CONSTRAINT `beneficiary_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `beneficiary_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `nws`
 --
 ALTER TABLE `nws`
-  ADD CONSTRAINT `nws_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `nws_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `ofw`
 --
 ALTER TABLE `ofw`
-  ADD CONSTRAINT `ofw_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `ofw_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `parents`
 --
 ALTER TABLE `parents`
-  ADD CONSTRAINT `parents_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `parents_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `self_employed`
 --
 ALTER TABLE `self_employed`
-  ADD CONSTRAINT `self_employed_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `self_employed_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

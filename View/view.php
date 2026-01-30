@@ -33,7 +33,8 @@
                         <p><strong>Phone:</strong> <?php echo htmlspecialchars($user['phone_number']); ?></p>
                         <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email_address']); ?></p>
                     </div>
-                    <button class="view-details" data-id="<?php echo $user['user_id']; ?>">View Details</button>
+                    <button class="edit-btn" data-id="<?php echo $user['user_id']; ?>">Edit</button>
+                    <button class="delete-btn" data-id="<?php echo $user['user_id']; ?>">Delete</button>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -54,16 +55,7 @@
 </div>
 </div>
 
-<!-- User Details Modal -->
-<div id="userModal" class="modal hidden">
-    <div class="modal-content">
-        <span class="close-btn">&times;</span>
 
-        <div id="modalBody">
-
-        </div>
-    </div>
-</div>
 
 <script src="../script.js"></script>
 

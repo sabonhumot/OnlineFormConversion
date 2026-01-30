@@ -73,13 +73,13 @@ a {
     text-decoration: none;
 }
 
-.view-details {
+.edit-btn, .delete-btn {
     padding: 8px 16px;
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-right: 10px;
     border-radius: 8px;
     border: none;
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
     color: white;
     font-size: 16px;
     font-weight: 500;
@@ -88,9 +88,22 @@ a {
     cursor: pointer;
 }
 
-.view-details:hover {
+.edit-btn {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+}
+
+.edit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.3);
+    box-shadow: 0 5px 15px rgba(66, 153, 225, 0.3);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 62, 62, 0.3);
 }
 
 .pagination {
